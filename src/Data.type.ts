@@ -18,4 +18,5 @@ export const dummyData: DataType[] = [
         Gender: "Male",
         city: "Ahmedabad"
     },
+
 ]

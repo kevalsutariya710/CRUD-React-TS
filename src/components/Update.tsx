@@ -17,7 +17,7 @@ interface Data {
   Gender: string
 }
 
-const Update = ({ Data, setUpPopup, UpSubmit }: Props) => {
+const Update: React.FC<Props> = ({ Data, setUpPopup, UpSubmit }) => {
 
   //! Hook
   const [listData, setListData] = useState<Data>({
@@ -28,24 +28,24 @@ const Update = ({ Data, setUpPopup, UpSubmit }: Props) => {
     mobileNo: Data.mobileNo,
     Gender: Data.Gender,
   })
-  const [cityChange, setCityChange] = useState(Data.city)
+  const [cityChange, setCityChange] = useState<string>(Data.city)
 
 
   //! city function
-  let seCityChange = (e: any) => {
+  let seCityChange = (e: any): void => {
     let value: string = e.target.value
     setCityChange(value)
   }
 
 
-  let Change = (e: any) => {
+  let Change = (e: any): void => {
     let name = e.target.name
     let value = e.target.value
     setListData({ ...listData, [name]: value })
   }
 
 
-  let handleSubmit = (e: any) => {
+  let handleSubmit = (e: any): void => {
     e.preventDefault();
     let UpdatedData: DataType = {
       id: listData.id,
@@ -63,7 +63,7 @@ const Update = ({ Data, setUpPopup, UpSubmit }: Props) => {
   }
 
 
-  let isChecked = (e: string) => listData.Gender === e
+  let isChecked = (e: string): boolean => listData.Gender === e
 
 
   return (
@@ -137,20 +137,20 @@ const Update = ({ Data, setUpPopup, UpSubmit }: Props) => {
                   <option value="Baroda">Baroda</option>
                 </select>
 
-                <div className="flex mt-3 items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                <div className="flex mt-3 items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b space-x-2">
                   <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className="bg-transparent hover:bg-red-600 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full"
                     type="button"
                     onClick={() => setUpPopup(false)}
                   >
                     Close
                   </button>
                   <button
-                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className="bg-transparent hover:bg-green-600 text-green-500 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded-full"
                     type="button"
                     onClick={handleSubmit}
                   >
-                    Save Changes
+                    Update
                   </button>
 
 
