@@ -4,13 +4,12 @@ import { DataType } from '../Data.type'
 type Props = {
   list: DataType[];
   onDelete: (data: string) => void;
-  setUpPopup: (data: boolean) => void
-  onEdit: (data: DataType) => void
+  setUpPopup: (data: boolean) => void;
+  onEdit: (data: DataType) => void;
+  search: string;
 }
 
-const Table = (props: Props) => {
-
-  const { list, onDelete, setUpPopup, onEdit } = props
+const Table: React.FC<Props> = ({ list, onDelete, setUpPopup, onEdit, search }) => {
 
 
   return (
@@ -44,38 +43,40 @@ const Table = (props: Props) => {
         <tbody className=''>
 
           {
-            list && list.map((res: any) => {
-              return (
-                <tr className="text-black border-b" key={res.id}>
-                  <td
-                    scope="row"
-                    className="px-6 py-4 font-medium text-bleck whitespace-nowrap "
-                  >
-                    {res.name}
-                  </td>
-                  <td className="px-6 py-4">{res.Email}</td>
-                  <td className="px-6 py-4">{res.Address}</td>
-                  <td className="px-6 py-4">{res.mobileNo}</td>
-                  <td className="px-6 py-4">{res.Gender}</td>
-                  <td className="px-6 py-4">{res.city}</td>
-                  <td className="px-6 py-4">
-
-                    <div className='space-x-3'>
-                      <button className='bg-blue-100 p-3 rounded-xl text-black'
-                        onClick={() => {
-                          onEdit(res)
-                          setUpPopup(true)
-                        }}
-                      >Update</button>
-                      <button className='bg-red-100 p-3 rounded-xl text-black'
-                        onClick={() => onDelete(res.id)}
-                      >Delete</button>
-                    </div>
-                  </td>
-                </tr>
-              )
-
+            list && list.filter((item: DataType): DataType | boolean => {
+              return search.toLowerCase() === "" ? item : item.name.toLowerCase().includes(search)
             })
+              .map((res: DataType) => {
+                return (
+                  <tr className="text-black border-b" key={res.id}>
+                    <td
+                      className="px-6 py-4 font-medium text-black whitespace-nowrap "
+                    >
+                      {res.name}
+                    </td>
+                    <td className="px-6 py-4">{res.Email}</td>
+                    <td className="px-6 py-4">{res.Address}</td>
+                    <td className="px-6 py-4">{res.mobileNo}</td>
+                    <td className="px-6 py-4">{res.Gender}</td>
+                    <td className="px-6 py-4">{res.city}</td>
+                    <td className="px-6 py-4">
+
+                      <div className='space-x-3'>
+                        <button className='bg-blue-100 p-3 rounded-xl text-black'
+                          onClick={() => {
+                            onEdit(res)
+                            setUpPopup(true)
+                          }}
+                        >Update</button>
+                        <button className='bg-red-100 p-3 rounded-xl text-black'
+                          onClick={() => onDelete(res.id)}
+                        >Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                )
+
+              })
           }
         </tbody>
       </table>

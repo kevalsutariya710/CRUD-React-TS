@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { DataType, dummyData } from "../Data.type"
 import Table from './Table'
 import AddItem from './AddItem'
@@ -11,7 +11,7 @@ const Home = () => {
     const [popUp, setPopUp] = useState<boolean>(false)
     const [updatePopup, setUpdatePopup] = useState<boolean>(false)
     const [DataToUpdate, setDataToUpdate] = useState({} as DataType)
-
+    const [search, setSearch] = useState<string>("")
 
     //! PopUp handle Function
     let setPop = (data: boolean): void => {
@@ -59,6 +59,11 @@ const Home = () => {
 
     return (
         <div className='container'>
+            <input type="search" name="search" id="search" placeholder='Search...'
+                className='bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[300px] p-2.5'
+                onChange={(e: ChangeEvent<HTMLInputElement>): void => setSearch(e.target.value)}
+            />
+
             <button className='absolute right-9 -mt-14 p-3 px-4 border rounded-xl bg-blue-200'
                 onClick={() => setPopUp(!popUp)}
             >
@@ -71,7 +76,9 @@ const Home = () => {
                 updatePopup && <Update Data={DataToUpdate} setUpPopup={setupPopup} UpSubmit={UpdateSubmit} />
             }
 
-            <Table list={employeeList} onDelete={deleteItem} setUpPopup={setupPopup} onEdit={Edit} />
+            <Table list={employeeList} onDelete={deleteItem} setUpPopup={setupPopup} onEdit={Edit}
+                search={search}
+            />
         </div>
     )
 }
