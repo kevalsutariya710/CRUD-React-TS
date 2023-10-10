@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { DataType } from '../Data.type';
+import toast from 'react-hot-toast';
 
 
 interface Props {
@@ -56,11 +57,13 @@ const AddItem: React.FC<Props> = ({ setPopUp, Submit }) => {
             city: getCity,
         }
         if (data.name === "" || data.Address === "" || data.Email === "" || data.city === '' || data.Gender === "") {
-            alert("Fill the Fields")
+            // alert("Fill the Fields")
+            toast.error("Please Enter Empty Field")
         }
         else {
             Submit(data)
             setPopUp(false)
+            toast.success(`${data.name} added Successfully`)
         }
     }
 
@@ -71,9 +74,9 @@ const AddItem: React.FC<Props> = ({ setPopUp, Submit }) => {
         <div>
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                 <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                   
+
                     <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                    
+
                         <div className="flex items-start justify-center p-5 border-b border-solid border-slate-200 rounded-t">
                             <h3 className="text-3xl font-semibold">
                                 Registration
@@ -81,7 +84,7 @@ const AddItem: React.FC<Props> = ({ setPopUp, Submit }) => {
                         </div>
 
 
-                        
+
                         <form >
                             <div className="relative p-6 flex-auto ">
 

@@ -3,6 +3,8 @@ import { DataType, dummyData } from "../Data.type"
 import Table from './Table'
 import AddItem from './AddItem'
 import Update from './Update'
+import Page from './Page'
+import toast from 'react-hot-toast';
 
 const Home: React.FC = () => {
 
@@ -33,9 +35,10 @@ const Home: React.FC = () => {
     //! Delete handle Function
     let deleteItem = (id: string): void => {
         if (id) {
-            alert('Are you sure u want to delete')
+            // alert('Are you sure u want to delete')
             let Updated: DataType[] = employeeList.filter((res: DataType): boolean => res.id !== id)
             setEmployeeList(Updated)
+            toast.success('Deleted Successfully')
         }
     }
 
@@ -69,6 +72,7 @@ const Home: React.FC = () => {
             <Table list={employeeList} onDelete={deleteItem} setUpPopup={setupPopup} onEdit={Edit}
                 setPopUp={setPopUp}
             />
+            <Page />
         </div>
     )
 }

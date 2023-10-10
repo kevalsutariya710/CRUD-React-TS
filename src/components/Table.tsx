@@ -15,7 +15,7 @@ const Table: React.FC<Props> = ({ list, onDelete, setUpPopup, onEdit, setPopUp }
   const [search, setSearch] = useState<string>("")
 
   return (
-    <div className="max-w-6xl mx-auto mt-5 border border-dotted rounded-lg">
+    <div className="max-w-7xl mx-auto mt-5 border border-dotted rounded-lg">
       <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
 
         <div className='flex justify-between'>
@@ -44,7 +44,7 @@ const Table: React.FC<Props> = ({ list, onDelete, setUpPopup, onEdit, setPopUp }
           </div>
         </div>
 
-        <table className="w-full text-sm text-left text-gray-500">
+        <table className="w-full text-sm text-left text-gray-500 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3">
@@ -70,7 +70,7 @@ const Table: React.FC<Props> = ({ list, onDelete, setUpPopup, onEdit, setPopUp }
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='w-full max-h-5 overflow-y-auto'>
 
             {
               list && list.filter((item: DataType): DataType | boolean => {
