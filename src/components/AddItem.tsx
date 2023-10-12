@@ -39,8 +39,8 @@ const AddItem: React.FC<Props> = ({ setPopUp, Submit }) => {
     //! onChang Handle
     let Change = (e: React.ChangeEvent<HTMLInputElement>): void => {
 
-        let name = e.target.name
-        let value = e.target.value
+        let name: string = e.target.name
+        let value: string = e.target.value
         setRegData({ ...regData, [name]: value })
     }
 
@@ -57,7 +57,6 @@ const AddItem: React.FC<Props> = ({ setPopUp, Submit }) => {
             city: getCity,
         }
         if (data.name === "" || data.Address === "" || data.Email === "" || data.city === '' || data.Gender === "") {
-            // alert("Fill the Fields")
             toast.error("Please Enter Empty Field")
         }
         else {
